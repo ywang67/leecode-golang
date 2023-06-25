@@ -1,3 +1,5 @@
+package main
+
 /*
  * @lc app=leetcode.cn id=173 lang=golang
  *
@@ -44,16 +46,20 @@
  *
  *
  */
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+
+// Definition for a binary tree node.
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 type BSTIterator struct {
 	stack *Stack
+}
+
+type Stack struct {
+	elements []*TreeNode
 }
 
 func Constructor(root *TreeNode) BSTIterator {
@@ -83,10 +89,6 @@ func (this *BSTIterator) Next() int {
 /** @return whether we have a next smallest number */
 func (this *BSTIterator) HasNext() bool {
 	return this.stack.Size() > 0
-}
-
-type Stack struct {
-	elements []*TreeNode
 }
 
 func NewStack() *Stack {
@@ -125,4 +127,3 @@ func (s *Stack) Values() []*TreeNode {
  * param_1 := obj.Next();
  * param_2 := obj.HasNext();
  */
-
