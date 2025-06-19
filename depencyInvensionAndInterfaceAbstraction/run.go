@@ -2,7 +2,11 @@ package depencyinvensionandinterfaceabstraction
 
 import (
 	"database/sql"
+	"encoding/csv"
+	"encoding/json"
 	"fmt"
+	"io"
+	"os"
 )
 
 type Custom_Repo interface {
@@ -34,4 +38,33 @@ func Run() {
 
 	testUserId := "123"
 	service.RegisterUser(testUserId)
+
+	r, _ := os.Open("data.csv")
+	NewTransactionFromCsv(r)
+}
+
+func NewTransactionFromCsv(r io.Reader) {
+	reader := csv.NewReader(r)
+	_, err := reader.Read()
+	if err != nil {
+		fmt.Println("reader error: ", err)
+		return
+	}
+
+	var txns []interface{}
+	for {
+		record, err := reader.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			fmt.Println("reader error: ", err)
+			return
+		}
+
+		txns = append(txns, record)
+
+		test, _ := json.Marshal(txns)
+		fmt.Println("000tester: ", string(test))
+	}
 }
