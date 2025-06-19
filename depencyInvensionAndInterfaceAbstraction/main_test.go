@@ -12,7 +12,7 @@ func (mRepo *Mock_Repo) CreateUser(userId string) bool {
 	return true
 }
 
-func mock_test(t *testing.T) {
+func TestMockRepo(t *testing.T) {
 	service := &UserService{
 		repo: &Mock_Repo{},
 	}

@@ -26,7 +26,7 @@ func (rds *Postgres_Repo) CreateUser(userId string) bool {
 	return true
 }
 
-func main() {
+func Run() {
 	rdsRepo := &Postgres_Repo{}
 	service := &UserService{
 		repo: rdsRepo,
